@@ -1,9 +1,12 @@
-# Python
+# Python & Bytecode
 __pycache__/
 *.py[cod]
+*.pyo
 *$py.class
 *.so
 .Python
+
+# Virtual environments
 env/
 venv/
 .venv/
@@ -13,10 +16,8 @@ ENV/
 .env
 .env.local
 
-# IDE
-.vscode/
-.idea/
-*.swp
+# Jupyter
+.ipynb_checkpoints/
 
 # Testing & build
 .pytest_cache/
@@ -25,3 +26,10 @@ htmlcov/
 dist/
 build/
 *.egg-info/
+
+# IDE & OS files
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
