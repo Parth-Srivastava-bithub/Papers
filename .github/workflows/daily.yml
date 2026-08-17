@@ -39,11 +39,12 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           
-          # Check if papers directory has changes
-          if [ -n "$(git status --porcelain papers)" ]; then
-            git add papers/
+          # Check if dailypapers directory has changes
+          if [ -n "$(git status --porcelain dailypapers)" ]; then
+            git add dailypapers/
             TODAY=$(date +'%Y-%m-%d')
             git commit -m "📚 Daily Research Papers: ${TODAY} [skip ci]"
+            git pull --rebase origin main || true
             git push
           else
             echo "No new paper reports to commit."

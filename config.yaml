@@ -36,4 +36,4 @@ sources:
     max_results: 35
 
 # Output directory for daily markdown archives
-output_dir: "papers"
+output_dir: "dailypapers"
