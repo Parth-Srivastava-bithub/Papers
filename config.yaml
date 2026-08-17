@@ -1,0 +1,39 @@
+# PaperPilot Configuration
+
+# Research topics of interest (Used for filtering & ranking relevance)
+topics:
+  - "large language models"
+  - "llm"
+  - "reasoning"
+  - "agentic"
+  - "machine learning"
+  - "deep learning"
+  - "generative ai"
+  - "computer vision"
+  - "multimodal"
+  - "reinforcement learning"
+  - "retrieval augmented generation"
+  - "rag"
+
+# Maximum number of top papers to include in the daily report
+daily_limit: 10
+
+# Academic paper sources
+sources:
+  arxiv:
+    enabled: true
+    categories:
+      - "cs.AI" # Artificial Intelligence
+      - "cs.CL" # Computation and Language
+      - "cs.CV" # Computer Vision
+      - "cs.LG" # Machine Learning
+      - "stat.ML" # Statistics - Machine Learning
+    max_results: 35
+
+  semantic_scholar:
+    enabled: true
+    query: "machine learning OR deep learning OR large language models OR artificial intelligence"
+    max_results: 35
+
+# Output directory for daily markdown archives
+output_dir: "papers"

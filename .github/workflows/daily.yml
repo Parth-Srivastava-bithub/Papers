@@ -1,0 +1,50 @@
+name: Daily Research Radar
+
+on:
+  schedule:
+    # Runs at 02:30 UTC (08:00 AM IST) every single day
+    - cron: '30 2 * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  run-paperpilot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 🐍 Set up Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: 📦 Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 🚀 Run PaperPilot Pipeline
+        env:
+          SEMANTIC_SCHOLAR_API_KEY: ${{ secrets.SEMANTIC_SCHOLAR_API_KEY }}
+        run: |
+          python -m src.main
+
+      - name: 💾 Commit and Push Daily Report
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          
+          # Check if papers directory has changes
+          if [ -n "$(git status --porcelain papers)" ]; then
+            git add papers/
+            TODAY=$(date +'%Y-%m-%d')
+            git commit -m "📚 Daily Research Papers: ${TODAY} [skip ci]"
+            git push
+          else
+            echo "No new paper reports to commit."
+          fi
